@@ -23,7 +23,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v5
         with:
-          repository: ${{ github.repository }}
+          repository: ${{ secrets.DOCKER_USERNAME}}/${{ github.repository }}
           push: true
           tag_with_ref: true
           tag_with_sha: true
