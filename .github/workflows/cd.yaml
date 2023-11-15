@@ -1,8 +1,12 @@
-on: push
-name: Deploy Image
+on:
+  push:
+    branches:
+    - main
+
+name: CD
 jobs:
   deploy:
-    name: deploy to cluster
+    name: deploy main image
     runs-on: ubuntu-latest
     steps:
       - 
@@ -24,4 +28,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: javieralcocer/gh-actions:${{ github.sha }}
+          tags: javieralcocer/gh-actions:main-${{ github.sha }}
