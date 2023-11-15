@@ -1,5 +1,5 @@
 on: push
-name: CI
+name: Deploy Image
 jobs:
   deploy:
     name: deploy to cluster
