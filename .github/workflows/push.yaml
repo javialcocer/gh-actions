@@ -5,12 +5,24 @@ jobs:
     name: deploy to cluster
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - name: build and push to docker
-        uses: docker/build-push-aciton@v5
+      - 
+        uses: actions/checkout@main
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME}}
-          passwword: ${{ secrets.DOCKER_SECRET}}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
           repository: ${{ github.repository }}
           tag_with_ref: true
           tag_with_sha: true
